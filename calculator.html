@@ -1,0 +1,150 @@
+<html>
+	<head>
+		<!-- Bootstrap -->
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+		<!-- Latest compiled and minified JavaScript
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
+		<!-- End of Bootstrap -->
+
+		<style>
+			body{
+				max-width: 960px;
+				margin: 0 auto;
+				text-align: center;
+			}
+
+			input {
+				border-style: none;
+			}
+			.calc {
+				border: 1px solid red;
+				width: 225px;
+				margin: 0 auto;
+			}
+			.row {
+				width: 100%;
+				margin: 15px;
+			}
+			.num, .operator, .ans, .clr {
+				border-right: #f2f2f2;
+				margin:0px 10px 10px 0px;
+				padding: 5px 18.5px;
+			}
+
+			.num {
+				background-color: #FFFFCC;
+			}
+
+			.operator {
+				background-color: #FF9933;
+			}
+
+			.ans {
+				border: 1px solid black	;
+				width: 80%;
+			}
+
+			.clr {
+				
+			}
+		</style>
+
+		<script type="text/javascript">
+			var firstValue = " ";
+			var secondValue = " ";
+			var operatorValue = " ";
+
+			var getInput = {
+				numClick:function(btn){
+					if(operatorValue == " "){
+						firstValue += (btn.value);
+						document.getElementById("result").value = firstValue;
+					} else if(operatorValue != " "){
+						document.getElementById("result").value = " ";
+						secondValue += (btn.value);
+						document.getElementById("result").value = secondValue;
+						console.log("first Value is " + firstValue + "and second value is  " + secondValue);
+					}
+				},
+
+				opClick:function(operator,id){
+					operatorValue = (operator.value);	
+    				document.getElementById(id).css("background-color","red;");
+					return operatorValue;
+				},
+
+				eqClick:function(){
+					result = eval(parseFloat(firstValue) + operatorValue + parseFloat(secondValue));
+					document.getElementById("result").value = result;
+					console.log(result);	
+					firstValue = result;
+					secondValue = " ";
+					operatorValue = " ";
+				},
+
+				clearClick:function(){
+					firstValue = " ";
+					secondValue = " ";
+					operatorValue = " "; 
+					document.getElementById("result").value = "";
+					console.log("first Value is " + firstValue + "and second value is  " + secondValue + " operator is: " + operatorValue);	
+				},
+
+
+
+
+
+			}
+
+		
+		</script>
+
+	</head>
+	<body>
+		<div class="page-container">
+			<div class="row">
+				<h1></h1>
+			</div>
+			<div class="calc">
+				<div class="row">
+					<input type="text" class="ans col-md-4" id="result">
+				</div>
+				<div class="row">
+					<input type="button" value="7" class="num col-md-1" onclick="getInput.numClick(this)"> 
+					<input type="button" value="8" class="num col-md-1" onclick="getInput.numClick(this)"> 
+					<input type="button" value="9" class="num col-md-1" onclick="getInput.numClick(this)"> 
+					<input type="button" value="*" class="operator col-md-1" id="multiply" onclick="getInput.opClick(this,id)"> 
+				</div>
+				<div class="row">
+					<input type="button" value="6" class="num col-md-1" onclick="getInput.numClick(this)"> 
+					<input type="button" value="5" class="num col-md-1" onclick="getInput.numClick(this)"> 
+					<input type="button" value="4" class="num col-md-1" onclick="getInput.numClick(this)"> 
+					<input type="button" value="+" class="operator col-md-1" onclick="getInput.opClick(this)"> 
+				</div>
+				<div class="row">
+					<input type="button" value="3" class="num col-md-1" onclick="getInput.numClick(this)"> 
+					<input type="button" value="2" class="num col-md-1" onclick="getInput.numClick(this)"> 
+					<input type="button" value="1" class="num col-md-1" onclick="getInput.numClick(this)"> 
+					<input type="button" value="-" class="operator col-md-1" onclick="getInput.opClick(this)"> 
+				</div>
+				<div class="row">
+					<input type="button" value="0" class="num col-md-1" onclick="getInput.numClick(this)"> 
+					<input type="button" value="." class="num  col-md-1" onclick="getInput.numClick(this)">
+					<input type="button" value="%" class="operator col-md-1" onclick="getInput.opClick(this)"> 
+					<input type="button" value="=" class="operator col-md-1" onclick="getInput.eqClick(this)"> 
+				</div>
+				<div class="row">
+					<input type="button" value="Clr" class="clr  col-md-7" onclick="getInput.clearClick(this)"> 
+					<input type="button" value="/" class="operator col-md-1" onclick="getInput.opClick(this)"> 
+				</div>
+			</div>
+
+		</div>
+
+	</body>
+</html>
